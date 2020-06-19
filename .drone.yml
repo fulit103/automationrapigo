@@ -12,13 +12,6 @@ steps:
 - name: testdocker
   image: docker:dind
   volumes:
-  - name: dockersock
-    path: /var/run/docker.sock
   commands:
   - ls
   - docker ps -a
-
-volumes:
-- name: dockersock
-  host:
-    path: /var/run/docker.sock
