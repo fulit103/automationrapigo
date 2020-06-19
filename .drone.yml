@@ -9,15 +9,15 @@ steps:
   - pip install -r src/requirements.txt  
   - pytest src/tests/test_initial.py
 
-- name: testdocker
-  image: docker:dind
-  volumes:
-  - name: dockersock
-    path: /var/run
-  commands:
-  - sleep 10 # give docker enough time to start
-  - docker ps -a
+# - name: testdocker
+#   image: docker:dind
+#   volumes:
+#   - name: dockersock
+#     path: /var/run
+#   commands:
+#   - sleep 10 # give docker enough time to start
+#   - docker ps -a
 
-volumes:
-- name: dockersock
-  temp: {}
+# volumes:
+# - name: dockersock
+#   temp: {}
