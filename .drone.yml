@@ -8,3 +8,17 @@ steps:
   commands:
   - pip install -r src/requirements.txt  
   - pytest src/tests/test_initial.py
+
+- name: test
+  image: docker:dind
+  volumes:
+  - name: dockersock
+    path: /var/run/docker.sock
+  commands:
+  - ls
+  - docker ps -a
+
+volumes:
+- name: dockersock
+  host:
+    path: /var/run/docker.sock
