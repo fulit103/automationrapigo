@@ -1,0 +1,10 @@
+kind: pipeline
+type: docker
+name: default
+
+steps:
+- name: test
+  image: juliantoro/fastapibase
+  commands:
+  - pip install -r src/requirements.txt  
+  - pytest src/tests/test_initial.py
