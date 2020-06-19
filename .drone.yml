@@ -9,7 +9,7 @@ steps:
   - pip install -r src/requirements.txt  
   - pytest src/tests/test_initial.py
 
-- name: test
+- name: testdocker
   image: docker:dind
   volumes:
   - name: dockersock
