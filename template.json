@@ -1,0 +1,8 @@
+{
+  "type": "docker",
+  "image": "ubuntu",
+  "commit": true,
+  "changes": [
+    "ONBUILD COPY ./src /usr/src/app/"
+  ]
+}

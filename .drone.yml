@@ -9,6 +9,11 @@ steps:
   - pip install -r src/requirements.txt  
   - pytest src/tests/test_initial.py
 
+packer:
+  image: appleboy/drone-packer
+  template: template.json
+  actions: build
+
 # - name: testdocker
 #   image: docker:dind
 #   volumes:
