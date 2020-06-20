@@ -11,8 +11,9 @@ steps:
 
 - name: "packer"
   image: appleboy/drone-packer
-  template: template.json
-  actions: build
+  settings:
+    template: template.json
+    actions: build
 
 # - name: testdocker
 #   image: docker:dind
