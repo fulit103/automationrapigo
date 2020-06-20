@@ -1,8 +1,13 @@
 {
-  "type": "docker",
-  "image": "ubuntu",
-  "commit": true,
-  "changes": [
-    "ONBUILD COPY ./src /usr/src/app/"
+  "_comment": "This is a comment",
+  "builders": [
+    {
+      "type": "docker",
+      "image": "ubuntu",
+      "commit": true,
+      "changes": [
+        "ONBUILD COPY ./src /usr/src/app/"
+      ]
+    }
   ]
 }
