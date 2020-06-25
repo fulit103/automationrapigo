@@ -18,7 +18,6 @@ database = databases.Database(DATABASE_URL)
 async def startup():
     await database.connect()
 
-
 @app.on_event("shutdown")
 async def shutdown():
     await database.disconnect()

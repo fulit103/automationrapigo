@@ -25,7 +25,7 @@ class ServiceUpdateRepositoryMysql(ServiceUpdateRepositoryInterface):
   async def update_column(self, services: List[Service], atribute: str, value:Any ):    
     references = ",".join([f'"{sqlescape(service.reference.get())}"' for service in services])    
     
-    query = f"UPDATE itinerarios SET pagado_por_servientrega=1 WHERE referencia IN ( {references} )"
+    query = f"UPDATE itinerario SET pagado_por_servientrega=1 WHERE referencia IN ( {references} )"
    
     return await self.database.execute(query)
     
