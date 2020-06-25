@@ -1,51 +1,52 @@
-kind: pipeline
-name: default
-
-steps:
-- name: test
-  image: mysql
-  commands:
-  - sleep 40
-  - mysql -u root -h database --execute="SELECT VERSION();"
-
-services:
-- name: database
-  image: mysql
-  environment:
-    MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
-    MYSQL_DATABASE: test
 # kind: pipeline
-# type: docker
 # name: default
 
 # steps:
 # - name: test
-#   image: juliantoro/fastapibase
+#   image: mysql
 #   commands:
 #   - sleep 40
-#   - pip install -r src/requirements.txt  
-#   - pytest .
-#   environment:
-#     AIRTABLE_API_KEY:
-#       from_secret: AIRTABLE_API_KEY
-#     AIRTABLE_BASE:
-#       from_secret: AIRTABLE_BASE
-
-# # - name: "packer"
-# #   image: appleboy/drone-packer
-# #   settings:
-# #     template: template.json
-# #     actions: build
+#   - mysql -u root -h database --execute="SELECT VERSION();"
 
 # services:
-# - name: dbmysql
+# - name: database
 #   image: mysql
 #   environment:
-#     MYSQL_ROOT_PASSWORD: example
-#     MYSQL_ROOT_PASSWORD: secret
-#     MYSQL_DATABASE: automation
-#     MYSQL_USER: admin
-#     MYSQL_PASSWORD": example
+#     MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+#     MYSQL_DATABASE: test
+
+kind: pipeline
+# type: docker
+name: default
+
+steps:
+- name: test
+  image: juliantoro/fastapibase
+  commands:
+  - sleep 50
+  - pip install -r src/requirements.txt  
+  - pytest .
+  environment:
+    AIRTABLE_API_KEY:
+      from_secret: AIRTABLE_API_KEY
+    AIRTABLE_BASE:
+      from_secret: AIRTABLE_BASE
+
+# - name: "packer"
+#   image: appleboy/drone-packer
+#   settings:
+#     template: template.json
+#     actions: build
+
+services:
+- name: dbmysql
+  image: mysql
+  environment:
+    MYSQL_ROOT_PASSWORD: example
+    MYSQL_ROOT_PASSWORD: secret
+    MYSQL_DATABASE: automation
+    MYSQL_USER: admin
+    MYSQL_PASSWORD": example
 
 # - name: testdocker
 #   image: docker:dind
