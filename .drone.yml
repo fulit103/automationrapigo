@@ -27,6 +27,7 @@ steps:
   - pip install -r src/requirements.txt  
   - pytest .
   environment:
+    DATABASE_URL: mysql://dbmysql/automation
     AIRTABLE_API_KEY:
       from_secret: AIRTABLE_API_KEY
     AIRTABLE_BASE:
@@ -42,11 +43,12 @@ services:
 - name: dbmysql
   image: mysql
   environment:
-    MYSQL_ROOT_PASSWORD: example
-    MYSQL_ROOT_PASSWORD: secret
+    MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
     MYSQL_DATABASE: automation
-    MYSQL_USER: admin
-    MYSQL_PASSWORD": example
+    # MYSQL_ROOT_PASSWORD: example
+    # MYSQL_ROOT_PASSWORD: secret
+    # MYSQL_USER: admin
+    # MYSQL_PASSWORD": example
 
 # - name: testdocker
 #   image: docker:dind

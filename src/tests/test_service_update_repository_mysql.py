@@ -6,12 +6,12 @@ import pytest
 import time
 
 from databases import Database
-
-#from .fixtures import mysqldocker
+from app.config import Settings
 
 @pytest.fixture
 async def database():  
-  DATABASE_URL = "mysql://root:secret@dbmysql/automation"
+  settings = Settings()
+  DATABASE_URL = settings.database_url #"mysql://root:secret@dbmysql/automation"
   database = Database(DATABASE_URL)
   await database.connect()
   query = """CREATE TABLE IF NOT EXISTS itinerarios (

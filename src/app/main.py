@@ -10,7 +10,7 @@ settings = Settings()
 app = FastAPI()
 
 
-DATABASE_URL = "mysql://root:secret@192.168.0.14/automation"
+DATABASE_URL = settings.database_url
 
 database = databases.Database(DATABASE_URL)
 
