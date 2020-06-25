@@ -6,7 +6,7 @@ steps:
 - name: test
   image: juliantoro/fastapibase
   commands:
-  - sleep 20
+  - sleep 40
   - pip install -r src/requirements.txt  
   - pytest .
   environment:
