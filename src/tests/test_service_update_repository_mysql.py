@@ -14,7 +14,7 @@ async def database():
   DATABASE_URL = settings.database_url #"mysql://root:secret@dbmysql/automation"
   database = Database(DATABASE_URL)
   await database.connect()
-  query = """CREATE TABLE IF NOT EXISTS itinerarios (
+  query = """CREATE TABLE IF NOT EXISTS itinerario (
     id INT NOT NULL AUTO_INCREMENT,
     pagado_por_servientrega INT NULL,
     referencia VARCHAR(45) NULL,
@@ -24,7 +24,7 @@ async def database():
 
   yield database
   
-  await database.execute(query="DROP TABLE `automation`.`itinerarios`")
+  await database.execute(query="DROP TABLE `automation`.`itinerario`")
   await database.disconnect()
   
 @pytest.mark.asyncio
@@ -35,7 +35,7 @@ async def test_update_all_services(database):
     {"referencia": "3", "pagado_por_servientrega": 3},
     {"referencia": "4", "pagado_por_servientrega": 4}
   ]
-  await database.execute_many("INSERT INTO itinerarios ( referencia, pagado_por_servientrega) VALUES ( :referencia, :pagado_por_servientrega )", values )
+  await database.execute_many("INSERT INTO itinerario ( referencia, pagado_por_servientrega) VALUES ( :referencia, :pagado_por_servientrega )", values )
   
 
   s1 = Service(ReferenceValue("1"))
@@ -47,7 +47,7 @@ async def test_update_all_services(database):
   repository = ServiceUpdateRepositoryMysql(database)
   await repository.update_column(list, "pagado_por_servientrega", 1 )
   
-  records = await database.fetch_all("SELECT referencia, pagado_por_servientrega FROM itinerarios WHERE pagado_por_servientrega=1")  
+  records = await database.fetch_all("SELECT referencia, pagado_por_servientrega FROM itinerario WHERE pagado_por_servientrega=1")  
 
   assert records[0][1]==1
   assert records[1][1]==1
