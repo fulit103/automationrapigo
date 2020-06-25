@@ -2,4 +2,3 @@ from .service_list_repository_interface import ServiceListRepositoryInterface
 from .service_update_repository_interface import ServiceUpdateRepositoryInterface
 from .service import Service
 from .reference_value import ReferenceValue
-from .service_sercher_interface import ServiceSearcherInterface

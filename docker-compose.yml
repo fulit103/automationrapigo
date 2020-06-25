@@ -1,4 +1,4 @@
-version: '3.7'
+version: '3'
 
 services:
   web:
@@ -9,12 +9,16 @@ services:
     ports:
       - 8002:8000
 
-  db:
+  dbmysql:
     image: mysql
     command: --default-authentication-plugin=mysql_native_password
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: example
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: automation
+      MYSQL_USER: admin
+      MYSQL_PASSWORD": example
     ports:
       - 3306:3306
 

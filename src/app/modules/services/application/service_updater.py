@@ -1,11 +1,11 @@
 from typing import List, Any
-from app.models import Service
-from modules.services.domain import ServiceUpdaterInterface, ServiceUpdateRepositoryInterface
+from app.modules.services.domain import Service
+from app.modules.services.domain import ServiceUpdateRepositoryInterface
 
-class ServiceSearcher(ServiceUpdaterInterface):
+class ServiceUpdater():
 
   def __init__(self, repository: ServiceUpdateRepositoryInterface ):
      self.repository = repository
 
-  def update_column(self, services: List[Service], column: str, value:Any ):
-    records = self.repository.update_column(services, column, value)    
+  async def update_column(self, services: List[Service], column: str, value:Any ):
+    return await self.repository.update_column(services, column, value)    

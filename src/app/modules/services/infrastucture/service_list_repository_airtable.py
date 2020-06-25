@@ -17,7 +17,6 @@ class ServiceListRepositoryAirtable(ServiceListRepositoryInterface):
     services: List[Service] = [] 
     for r in records:
       fields = r["fields"]      
-      print(fields)
       reference = ReferenceValue(fields["reference"])
       service = Service( reference )
       services.append(service)

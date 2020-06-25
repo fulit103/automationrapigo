@@ -15,6 +15,16 @@ steps:
     template: template.json
     actions: build
 
+services:
+- name: dbmysql
+  image: mysql
+  environment:
+    MYSQL_ROOT_PASSWORD: example
+    MYSQL_ROOT_PASSWORD: secret
+    MYSQL_DATABASE: automation
+    MYSQL_USER: admin
+    MYSQL_PASSWORD": example
+
 # - name: testdocker
 #   image: docker:dind
 #   volumes:

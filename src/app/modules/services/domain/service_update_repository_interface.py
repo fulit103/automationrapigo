@@ -13,5 +13,5 @@ class ServiceUpdateRepositoryInterface(metaclass=abc.ABCMeta):
     )
 
   @abc.abstractmethod
-  def update_column(self, services: List[Service], column: str, value:Any ):
+  async def update_column(self, services: List[Service], column: str, value:Any ):
     raise NotImplementedError

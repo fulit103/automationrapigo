@@ -1,8 +1,8 @@
 from typing import List, Any
 from app.modules.services.domain import Service
-from app.modules.services.domain import ServiceSearcherInterface, ServiceListRepositoryInterface
+from app.modules.services.domain import ServiceListRepositoryInterface
 
-class ServiceSearcher(ServiceSearcherInterface):
+class ServiceSearcher():
 
   def __init__(self, repository: ServiceListRepositoryInterface ):
      self.repository = repository

@@ -1,45 +1,41 @@
 from app.modules.services.infrastucture import ServiceUpdateRepositoryMysql
 from app.modules.services.domain import Service, ReferenceValue
-import mysql.connector
 import docker
 import pytest
 
 import time
 
-from .fixtures import mysqldocker
+from databases import Database
 
-@pytest.fixture(scope='session')
-def cnx(mysqldocker):  
-  config = {
-    'user': 'admin',
-    'password': 'example',
-    'host': '127.0.0.1',
-    'database': 'automation',
-    'raise_on_warnings': True
-  }
-  cnx = mysql.connector.connect(**config)
-  cursor = cnx.cursor()
-  cursor.execute(
-    """CREATE TABLE `automation`.`itinerarios` (
-    `id` INT NOT NULL AUTO_INCREMENT,
-    `pagado_por_servientrega` INT NULL,
-    `referencia` VARCHAR(45) NULL,
-    PRIMARY KEY (`id`));"""
-  )
-  yield cnx
-  print("close connection ")
-  cnx.close()
+#from .fixtures import mysqldocker
+
+@pytest.fixture
+async def database():  
+  DATABASE_URL = "mysql://root:secret@dbmysql/automation"
+  database = Database(DATABASE_URL)
+  await database.connect()
+  query = """CREATE TABLE IF NOT EXISTS itinerarios (
+    id INT NOT NULL AUTO_INCREMENT,
+    pagado_por_servientrega INT NULL,
+    referencia VARCHAR(45) NULL,
+    PRIMARY KEY (id));
+  """
+  await database.execute(query=query)
+
+  yield database
   
-
-def test_update_all_services(cnx):
-  cursor = cnx.cursor()
+  await database.execute(query="DROP TABLE `automation`.`itinerarios`")
+  await database.disconnect()
+  
+@pytest.mark.asyncio
+async def test_update_all_services(database):  
   values = [
-    ("1", 0),
-    ("2", 0),
-    ("3", 0),
-    ("4", 0),
+    {"referencia": "1", "pagado_por_servientrega": 1},
+    {"referencia": "2", "pagado_por_servientrega": 2},
+    {"referencia": "3", "pagado_por_servientrega": 3},
+    {"referencia": "4", "pagado_por_servientrega": 4}
   ]
-  cursor.executemany("INSERT INTO itinerarios ( referencia, pagado_por_servientrega) VALUES ( %s, %s )", values )
+  await database.execute_many("INSERT INTO itinerarios ( referencia, pagado_por_servientrega) VALUES ( :referencia, :pagado_por_servientrega )", values )
   
 
   s1 = Service(ReferenceValue("1"))
@@ -48,13 +44,10 @@ def test_update_all_services(cnx):
 
   list = [s1, s2, s3]
 
-  repository = ServiceUpdateRepositoryMysql(cnx)
-  repository.update_column(list, "pagado_por_servientrega", 1 )
-
-  cursor.execute("SELECT referencia, pagado_por_servientrega FROM itinerarios WHERE pagado_por_servientrega=1")
-  records = cursor.fetchall()
-
-  print(records)
+  repository = ServiceUpdateRepositoryMysql(database)
+  await repository.update_column(list, "pagado_por_servientrega", 1 )
+  
+  records = await database.fetch_all("SELECT referencia, pagado_por_servientrega FROM itinerarios WHERE pagado_por_servientrega=1")  
 
   assert records[0][1]==1
   assert records[1][1]==1
