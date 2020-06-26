@@ -22,15 +22,25 @@ steps:
     repo: juliantoro/automationrapigo
     tags:
       - latest
-      - 'hotfix'
     username: juliantoro
     password: 
       from_secret: PASSWORD_DOCKERHUB
   when:
     branch:
     - master
+
+- name: docker  
+  image: plugins/docker
+  settings:
+    repo: juliantoro/automationrapigo
+    tags:
+      - 'hotfix'
+    username: juliantoro
+    password: 
+      from_secret: PASSWORD_DOCKERHUB
+  when:
+    branch:
     - hotfix
-    - feature/*
 
 # - name: testdocker
 #   image: docker:dind
