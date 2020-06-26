@@ -42,6 +42,20 @@ steps:
     branch:
     - hotfix
 
+- name: rancherupdate:
+  image: dubc/drone-rancher-stack-v1
+  settings:
+    url: http://rancher.webspro.co/v1/projects/1a16171
+    stack: automationrapiog/automationrapigo
+    accesskey: 
+      from_secret: rancher_access_key
+    secretkey: 
+      from_secret: rancher_secret_key
+    pull: true
+  when:
+    branch:
+    - master
+
 # - name: testdocker
 #   image: docker:dind
 #   volumes:
