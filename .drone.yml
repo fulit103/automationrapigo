@@ -20,6 +20,7 @@ steps:
   image: plugins/docker
   settings:
     repo: juliantoro/automationrapigo
+    auto_tag: true
     username: juliantoro
     password: 
       from_secret: PASSWORD_DOCKERHUB
