@@ -16,11 +16,11 @@ steps:
     AIRTABLE_BASE:
       from_secret: AIRTABLE_BASE
 
-# - name: "packer"
-#   image: appleboy/drone-packer
-#   settings:
-#     template: template.json
-#     actions: build
+- name: "packer"
+  image: appleboy/drone-packer
+  settings:
+    template: template.json
+    actions: build
 
 services:
 - name: dbmysql
