@@ -6,16 +6,28 @@ steps:
 - name: test
   image: juliantoro/fastapibase
   commands:
-  - sleep 50
+  - sleep 20
   - pip install -r src/requirements.txt  
-  - pytest .
-  - docker build .
+  - pytest .  
   environment:
     DATABASE_URL: mysql://dbmysql/automation
     AIRTABLE_API_KEY:
       from_secret: AIRTABLE_API_KEY
     AIRTABLE_BASE:
       from_secret: AIRTABLE_BASE
+
+- name: testdocker
+  image: docker:dind
+  volumes:
+  - name: dockersock
+    path: /var/run
+  commands:
+  - sleep 10 # give docker enough time to start
+  - docker ps -a
+
+volumes:
+- name: dockersock
+  temp: {}
 
 # - name: "packer"
 #   image: appleboy/drone-packer
