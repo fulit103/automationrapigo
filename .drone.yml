@@ -39,7 +39,7 @@ services:
 - name: dbmysql
   image: mysql
   environment:
-    MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+    MYSQL_ALLOW_EMPTY_PASSWORD: 'yes' 
     MYSQL_DATABASE: automation
 
 - name: docker
