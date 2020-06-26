@@ -16,14 +16,31 @@ steps:
     AIRTABLE_BASE:
       from_secret: AIRTABLE_BASE
 
-- name: docker  
+- name: docker1  
   image: plugins/docker
   settings:
     repo: juliantoro/automationrapigo
-    auto_tag: true
+    tags:
+      - latest
     username: juliantoro
     password: 
       from_secret: PASSWORD_DOCKERHUB
+  when:
+    branch:
+    - master
+
+- name: docker2  
+  image: plugins/docker
+  settings:
+    repo: juliantoro/automationrapigo
+    tags:
+      - 'hotfix'
+    username: juliantoro
+    password: 
+      from_secret: PASSWORD_DOCKERHUB
+  when:
+    branch:
+    - hotfix
 
 # - name: testdocker
 #   image: docker:dind

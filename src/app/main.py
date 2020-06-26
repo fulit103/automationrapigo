@@ -48,4 +48,4 @@ async def pay_services():
     service_updater = ServiceUpdater(repository_mysql)
     await service_updater.update_column(services, "pagos", 1 )
 
-    return { "message":"actualizado" }
+    return { "message":"updated 2.0" }
