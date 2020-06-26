@@ -1,20 +1,3 @@
-# kind: pipeline
-# name: default
-
-# steps:
-# - name: test
-#   image: mysql
-#   commands:
-#   - sleep 40
-#   - mysql -u root -h database --execute="SELECT VERSION();"
-
-# services:
-# - name: database
-#   image: mysql
-#   environment:
-#     MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
-#     MYSQL_DATABASE: test
-
 kind: pipeline
 # type: docker
 name: default
@@ -45,20 +28,3 @@ services:
   environment:
     MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
     MYSQL_DATABASE: automation
-    # MYSQL_ROOT_PASSWORD: example
-    # MYSQL_ROOT_PASSWORD: secret
-    # MYSQL_USER: admin
-    # MYSQL_PASSWORD": example
-
-# - name: testdocker
-#   image: docker:dind
-#   volumes:
-#   - name: dockersock
-#     path: /var/run
-#   commands:
-#   - sleep 10 # give docker enough time to start
-#   - docker ps -a
-
-# volumes:
-# - name: dockersock
-#   temp: {}
