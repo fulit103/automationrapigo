@@ -27,15 +27,15 @@ steps:
   - docker ps -a
   - docker build .
 
+- name: "packer"
+  image: appleboy/drone-packer
+  settings:
+    template: template.json
+    actions: build
+
 volumes:
 - name: dockersock
   temp: {}
-
-# - name: "packer"
-#   image: appleboy/drone-packer
-#   settings:
-#     template: template.json
-#     actions: build
 
 services:
 - name: dbmysql
