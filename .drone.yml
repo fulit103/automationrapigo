@@ -16,26 +16,29 @@ steps:
     AIRTABLE_BASE:
       from_secret: AIRTABLE_BASE
 
-- name: testdocker
-  image: docker:dind
-  volumes:
-  - name: dockersock
-    path: /var/run
-  commands:
-  - sleep 5 # give docker enough time to start
-  - ls
-  - docker ps -a
-  - docker build .
-
-- name: "packer"
-  image: appleboy/drone-packer
+- name: docker  
+  image: plugins/docker
   settings:
-    template: template.json
-    actions: build
+    repo: juliantoro/automationrapigo
+    auto_tag: true
+    username: juliantoro
+    password: 
+      from_secret: PASSWORD_DOCKERHUB
 
-volumes:
-- name: dockersock
-  temp: {}
+# - name: testdocker
+#   image: docker:dind
+#   volumes:
+#   - name: dockersock
+#     path: /var/run
+#   commands:
+#   - sleep 5 # give docker enough time to start
+#   - ls
+#   - docker ps -a
+#   - docker build .
+
+# volumes:
+# - name: dockersock
+#   temp: {}
 
 services:
 - name: dbmysql
@@ -44,9 +47,9 @@ services:
     MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
     MYSQL_DATABASE: automation
 
-- name: docker
-  image: docker:dind
-  privileged: true 
-  volumes:
-  - name: dockersock
-    path: /var/run
+# - name: docker
+#   image: docker:dind
+#   privileged: true 
+#   volumes:
+#   - name: dockersock
+#     path: /var/run
