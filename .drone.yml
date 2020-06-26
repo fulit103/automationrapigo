@@ -16,7 +16,7 @@ steps:
     AIRTABLE_BASE:
       from_secret: AIRTABLE_BASE
 
-- name: docker  
+- name: docker1  
   image: plugins/docker
   settings:
     repo: juliantoro/automationrapigo
@@ -29,7 +29,7 @@ steps:
     branch:
     - master
 
-- name: docker  
+- name: docker2  
   image: plugins/docker
   settings:
     repo: juliantoro/automationrapigo
