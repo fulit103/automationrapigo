@@ -46,7 +46,7 @@ steps:
   image: dubc/drone-rancher-stack-v1
   settings:
     url: http://rancher.webspro.co/v1/projects/1a16171
-    stack: automationrapiog/automationrapigo
+    stack: automationrapiog
     accesskey: 
       from_secret: rancher_access_key
     secretkey: 
