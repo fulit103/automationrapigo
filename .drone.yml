@@ -9,6 +9,7 @@ steps:
   - sleep 50
   - pip install -r src/requirements.txt  
   - pytest .
+  - docker build .
   environment:
     DATABASE_URL: mysql://dbmysql/automation
     AIRTABLE_API_KEY:
@@ -16,11 +17,11 @@ steps:
     AIRTABLE_BASE:
       from_secret: AIRTABLE_BASE
 
-- name: "packer"
-  image: appleboy/drone-packer
-  settings:
-    template: template.json
-    actions: build
+# - name: "packer"
+#   image: appleboy/drone-packer
+#   settings:
+#     template: template.json
+#     actions: build
 
 services:
 - name: dbmysql
