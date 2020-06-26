@@ -42,7 +42,7 @@ steps:
     branch:
     - hotfix
 
-- name: rancherupdate:
+- name: rancherupdate
   image: dubc/drone-rancher-stack-v1
   settings:
     url: http://rancher.webspro.co/v1/projects/1a16171
